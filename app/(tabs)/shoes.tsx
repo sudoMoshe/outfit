@@ -1,15 +1,18 @@
 
 import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+import {  View } from '../../components/Themed';
+import ItemPicker from '../../components/ItemPicker';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 export default function TabShoesScreen() {
+  
+  const shoes = useSelector((state:RootState)=>state.items.shoes);
+  // shoes.sizes.map()
   return (
+    
     <View style={styles.container}>
-      <Text style={styles.title}>shoes</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-     
+            <ItemPicker numColumns={5} category="shoes" items={shoes} />
     </View>
   );
 }
@@ -20,13 +23,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+ 
 });

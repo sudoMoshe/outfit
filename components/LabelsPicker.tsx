@@ -4,10 +4,12 @@ import { View, Text, StyleSheet, FlatList, Pressable, } from 'react-native';
 interface LabelsPickerProp{
 currentValue?:string,
 title:string,
+numColumns?:number,
 labels:string[],
+
 onSelect:(label:string)=>void
 }
-const LabelsPicker =({title , labels ,currentValue,onSelect}:LabelsPickerProp)=> {
+const LabelsPicker =({title , labels ,numColumns=2 ,currentValue,onSelect}:LabelsPickerProp)=> {
         const passiveColor ="#2f95dc";
         const activeColor = "#ccc";
 
@@ -16,7 +18,7 @@ return(<View style={styles.container}>
 <FlatList
 // style={{width:"100%"}}
 nestedScrollEnabled
-numColumns={2}
+numColumns={numColumns}
 // horizontal={true}
 data={labels}
 renderItem={({item , index})=>{

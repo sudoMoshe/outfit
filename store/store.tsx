@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 import { configureStore, applyMiddleware, Tuple, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware   from 'redux-saga'
-import itemsReducer from './slices/items'
-
 import { rootSaga } from './sagas/rootSaga'
+
+//slices
+import itemsReducer from './slices/items'
+import currentOutfitReducer from "./slices/currentOutfit"
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
@@ -13,7 +15,7 @@ const sagaMiddleware = createSagaMiddleware()
 const rootReducer = combineReducers({
   items: itemsReducer,
   // outfits: outfitsReducer,
-  // currentOutfit: currentOutfitReducer
+  currentOutfit: currentOutfitReducer
 });
 
 const store = configureStore({

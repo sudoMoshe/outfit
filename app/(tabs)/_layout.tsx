@@ -5,6 +5,8 @@ import { Pressable, useColorScheme } from 'react-native';
 import Colors from '../../constants/Colors';
 import { Ionicons , MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -19,7 +21,13 @@ function TabBarIcon(props: {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const navigate = useNavigation();
+  
 
+  const pants = useSelector((state: RootState) => state.currentOutfit.pants);
+  const shirt = useSelector((state: RootState) => state.currentOutfit.shirts);
+  const shoes = useSelector((state: RootState) => state.currentOutfit.shoes);
+  const passiveColor ="#ccc";
+  const activeColor = "#2f95dc";
   const commonOptions={
     headerLeft:({})=><Pressable onPress={()=> navigate.goBack()}><TabBarIcon name="arrow-back" color="black"/></Pressable>,
   }
@@ -56,7 +64,7 @@ export default function TabLayout() {
               options={{
                 ...commonOptions,
                 title: 'pants',
-                tabBarIcon: ({ color }) => <TabBarIcon name="glasses-sharp"  color={color} />,
+                tabBarIcon: ({ color }) => <TabBarIcon name="glasses-sharp"  color={pants?activeColor:passiveColor} />,
               }}
             />
             <Tabs.Screen
@@ -64,7 +72,7 @@ export default function TabLayout() {
               options={{
               ...commonOptions,
               title:"shoes",
-              tabBarIcon: ({ color }) => <MaterialCommunityIcons name="shoe-sneaker" size={28} color={color} />,
+              tabBarIcon: ({ color }) => <MaterialCommunityIcons name="shoe-sneaker" size={28} color={shoes?activeColor:passiveColor} />,
               }}
               />
              <Tabs.Screen
@@ -72,7 +80,7 @@ export default function TabLayout() {
                 options={{
                   ...commonOptions,
                 title:"shirts",
-                tabBarIcon: ({ color }) => <TabBarIcon name="shirt"  color={color} />,
+                tabBarIcon: ({ color }) => <TabBarIcon name="shirt"  color={shirt?activeColor:passiveColor} />,
                 }}
               />
 

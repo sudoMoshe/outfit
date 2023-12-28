@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import fakeApiData from "../sagas/fakeApiData"
+
+
+export type Category = "shirts"|"shoes"|"pants";
 export interface Item{
     sizes:string[]|number[],
     colors:string[],
