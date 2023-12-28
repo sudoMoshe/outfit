@@ -2,9 +2,10 @@ import React , {useEffect} from 'react';
 import { View  , StyleSheet  , Text , Button , ActivityIndicator } from 'react-native';
 import { Items  , Item} from '../../store/slices/items';
 import { FontAwesome } from '@expo/vector-icons';
-interface HomeTabProp extends Items{
+interface HomeTabProp {
+    loading:boolean
 }
-const HomeTab =({loading , shoes , shirts , pants}:HomeTabProp)=> {
+const HomeTab =({loading }:HomeTabProp)=> {
 
   
 return(<View style={styles.container}>

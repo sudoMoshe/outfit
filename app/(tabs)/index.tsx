@@ -20,12 +20,12 @@ export default function MainScreen() {
 
   const shirts = useSelector((state:RootState)=>state.items.shirts);
   const shoes = useSelector((state:RootState)=>state.items.shoes);
-  const pants = useSelector((state:RootState)=>state.items.pants);
+
 
 
   return (
     <View style={styles.container}>
-      <HomeTab shirts={shirts} shoes={shoes} pants={pants} loading={loading}  />
+      <HomeTab  loading={loading}  />
     {/* <Button title='test' onPress={()=>{}}/> */}
     </View>
   );
