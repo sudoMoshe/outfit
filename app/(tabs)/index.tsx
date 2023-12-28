@@ -1,14 +1,32 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet , Button ,ActivityIndicator  } from 'react-native';
+// import { useDispatch, useSelector } from 'react-redux';
 import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
+import { Text, View  } from '../../components/Themed';
+import {  apiCallBegan, fakeApiCallBegan  } from '../../store/slices/items';
+// import { fetchData } from '../../store/Actions';
+import { useAppDispatch } from "../../store/hooks"
+import { useSelector, useStore } from 'react-redux';
+import { useState, useEffect } from 'react';
+import HomeScreen from '../screens/HomeScreen';
+import { RootState } from '../../store/store';
 
-export default function TabOneScreen() {
+export default function MainScreen() {
+
+  useEffect(()=>{
+    dispatch(fakeApiCallBegan());
+  },[]);
+  const dispatch = useAppDispatch();
+  const loading = useSelector((state: RootState) => state.items.loading);
+
+  const shirts = useSelector((state:RootState)=>state.items.shirts);
+  const shoes = useSelector((state:RootState)=>state.items.shoes);
+  const pants = useSelector((state:RootState)=>state.items.pants);
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <HomeScreen shirts={shirts} shoes={shoes} pants={pants} loading={loading}  />
+    {/* <Button title='test' onPress={()=>{}}/> */}
     </View>
   );
 }

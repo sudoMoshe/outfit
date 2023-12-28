@@ -8,5 +8,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "store/Actions.jsx", "api/redux.jsx.jsx", "api/getData.jsx", "store/store.jsx", "store/store.jsx"  ]
 }
