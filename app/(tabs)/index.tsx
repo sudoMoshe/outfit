@@ -7,15 +7,15 @@ import {  apiCallBegan, fakeApiCallBegan  } from '../../store/slices/items';
 import { useAppDispatch } from "../../store/hooks"
 import { useSelector, useStore } from 'react-redux';
 import { useState, useEffect } from 'react';
-import HomeScreen from '../screens/HomeScreen';
+import HomeTab from './_HomeTab';
 import { RootState } from '../../store/store';
 
 export default function MainScreen() {
 
+  const dispatch = useAppDispatch();
   useEffect(()=>{
     dispatch(fakeApiCallBegan());
   },[]);
-  const dispatch = useAppDispatch();
   const loading = useSelector((state: RootState) => state.items.loading);
 
   const shirts = useSelector((state:RootState)=>state.items.shirts);
@@ -25,7 +25,7 @@ export default function MainScreen() {
 
   return (
     <View style={styles.container}>
-      <HomeScreen shirts={shirts} shoes={shoes} pants={pants} loading={loading}  />
+      <HomeTab shirts={shirts} shoes={shoes} pants={pants} loading={loading}  />
     {/* <Button title='test' onPress={()=>{}}/> */}
     </View>
   );
@@ -34,6 +34,7 @@ export default function MainScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width:"100%",
     alignItems: 'center',
     justifyContent: 'center',
   },
