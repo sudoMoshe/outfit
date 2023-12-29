@@ -29,7 +29,7 @@ export default function TabLayout() {
   const passiveColor ="#ccc";
   const activeColor = "#2f95dc";
   const commonOptions={
-    headerLeft:({})=><Pressable onPress={()=> navigate.goBack()}><TabBarIcon name="arrow-back" color="black"/></Pressable>,
+    headerLeft:({})=><Pressable onPress={()=> navigate.goBack()}><TabBarIcon name="arrow-back" color={passiveColor}/></Pressable>,
   }
   return (
     <Tabs
@@ -39,24 +39,24 @@ export default function TabLayout() {
             <Tabs.Screen
               name="index"
               options={{
-                title: 'Tab One',
+                title: '',
                 // tabBarIcon: ({ color }) => <TabBarIcon name="glasses-sharp" color={color} />,
                 // This tab will no longer show up in the tab bar.
                 href: null,
-                headerRight: () => (
-                  <Link href="/modal" asChild>
-                    <Pressable>
-                      {({ pressed }) => (
-                        <FontAwesome
-                          name="info-circle"
-                          size={25}
-                          color={Colors[colorScheme ?? 'light'].text}
-                          style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                        />
-                      )}
-                    </Pressable>
-                  </Link>
-                ),
+                // headerRight: () => (
+                //   <Link href="/modal" asChild>
+                //     <Pressable>
+                //       {({ pressed }) => (
+                //         <FontAwesome
+                //           name="info-circle"
+                //           size={25}
+                //           color={Colors[colorScheme ?? 'light'].text}
+                //           style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                //         />
+                //       )}
+                //     </Pressable>
+                //   </Link>
+                // ),
               }}
             />
             <Tabs.Screen

@@ -2,10 +2,14 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
-import { useEffect } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import { Provider } from 'react-redux'
 import store from "../store/store";
+import ImagesProvider from '../contexts/ImagesContext';
+import images from "../assets/images";
+
+
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -21,6 +25,8 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  
+
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     ...FontAwesome.font,
@@ -45,17 +51,20 @@ export default function RootLayout() {
 }
 
 
+
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Provider store={store} >
+      <ImagesProvider value={images}>
 
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
+      </ImagesProvider>
       </Provider>
     </ThemeProvider>
   );

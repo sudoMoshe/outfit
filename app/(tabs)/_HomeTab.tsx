@@ -1,18 +1,24 @@
 import React , {useEffect} from 'react';
 import { View  , StyleSheet  , Text , Button , ActivityIndicator } from 'react-native';
-import { Items  , Item} from '../../store/slices/items';
-import { FontAwesome } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
-import { OutfitItem } from '../../store/slices/currentOutfit';
 import { RootState } from '../../store/store';
+import { router } from 'expo-router';
 interface HomeTabProp {
     loading:boolean
 }
 const HomeTab =({loading }:HomeTabProp)=> {
+    const isCurrentOutfitReady = useSelector((state:RootState)=>state.currentOutfit.outfitReady);
     const pants = useSelector((state: RootState) => state.currentOutfit.pants);
     const shirt = useSelector((state: RootState) => state.currentOutfit.shirts);
     const shoes = useSelector((state: RootState) => state.currentOutfit.shoes);
     const progress = (!!pants?1:0)+(!!shirt?1:0)+(!!shoes?1:0);
+
+
+    useEffect(()=>{
+        if(isCurrentOutfitReady) {
+            router.replace("/modal");
+        }
+    },[isCurrentOutfitReady])
 //   console.log("pants",pants);
 if(loading) return (<View style={styles.container}>
     <ActivityIndicator size="large"  animating={loading} /></View>)

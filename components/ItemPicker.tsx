@@ -4,12 +4,13 @@ import { Category, Item } from '../store/slices/items';
 import ColorsPicker from './ColorsPicker';
 import LabelsPicker from './LabelsPicker';
 import AppScrollView from './AppScrollView';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Popup from './Popup';
 import { Ionicons } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native';
 import { addItem } from '../store/slices/currentOutfit';
 import { useAppDispatch } from '../store/hooks';
+import ItemDisplay from './ItemDisplay';
 
 interface ItemPickerProp{
     category:Category,
@@ -23,6 +24,14 @@ const ItemPicker =({items , category,numColumns}:ItemPickerProp)=> {
     const [color , setColor] = useState<string>();
 
     const navigation = useNavigation();
+
+    useEffect(()=>{
+        navigation.addListener("focus" ,()=>{
+            // console.log("should reset states here");
+            setBrand(undefined);
+            setItemName(undefined);
+        })
+    },[])
     const dispatch = useAppDispatch();
 
     const openPopup = (color:string)=>{
@@ -69,13 +78,9 @@ return(
  <Ionicons name="close-circle-outline" size={40} color="black"  />
     </Pressable>
     </View>
-    <View style={{top:60 , height:"70%" , justifyContent:"center" , alignItems:"center" , flex:1 }}>
+    <View style={{top:-40, height:"70%" , justifyContent:"center" , alignItems:"center" , flex:1 }}>
 
-<Text style={{fontSize: 20,fontWeight: 'bold',paddingBottom:20}} >  {color} {itemName} 
-</Text>
-<Text style={{fontSize: 20,fontWeight: 'bold',paddingBottom:20}} > 
- {brand} {category}
-</Text>
+<ItemDisplay category={category} brand={brand} itemName={itemName}  color={color}/>
 <Text style={{fontSize: 20,fontWeight: 'bold',}} > 
 pleace select the size to proceed
     </Text>

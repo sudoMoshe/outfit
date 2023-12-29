@@ -10,9 +10,10 @@ export interface OutfitItem{
 export interface Outfit{
     shirts?:OutfitItem,
     shoes?:OutfitItem,
-    pants?:OutfitItem
+    pants?:OutfitItem,
+    outfitReady:boolean
 }
-const initalState:Outfit={};
+const initalState:Outfit={outfitReady:false};
 
 const slice = createSlice({
     name:"currentOutfit" ,
@@ -21,10 +22,19 @@ const slice = createSlice({
         addItem:(outfit ,action)=>{
             const category:Category = action.payload.category;
             outfit[category] = action.payload.item;
+            if(outfit.pants&&outfit.shirts&&outfit.shoes){
+                outfit.outfitReady=true;
+            }
         },
+        resetAllItems:(outfit )=>{
+            outfit = initalState;
+        },
+        outfitNotReady:(outfit)=>{
+            outfit.outfitReady=false;
+        }
        
     }
 });
 
-export const {addItem}=slice.actions;
+export const {addItem ,resetAllItems,outfitNotReady}=slice.actions;
 export default slice.reducer;
