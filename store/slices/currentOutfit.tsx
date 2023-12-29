@@ -13,7 +13,7 @@ export interface Outfit{
     pants?:OutfitItem,
     outfitReady:boolean
 }
-const initalState:Outfit={outfitReady:false};
+const initalState:Outfit={outfitReady:false ,shirts:undefined ,shoes:undefined , pants:undefined };
 
 const slice = createSlice({
     name:"currentOutfit" ,
@@ -27,7 +27,11 @@ const slice = createSlice({
             }
         },
         resetAllItems:(outfit )=>{
-            outfit = initalState;
+            outfit.outfitReady=false;
+            outfit.pants=undefined;
+            outfit.shirts=undefined;
+            outfit.shoes=undefined;
+            
         },
         outfitNotReady:(outfit)=>{
             outfit.outfitReady=false;

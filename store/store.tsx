@@ -6,6 +6,7 @@ import { rootSaga } from './sagas/rootSaga'
 //slices
 import itemsReducer from './slices/items'
 import currentOutfitReducer from "./slices/currentOutfit"
+import outfitsReducer from "./slices/outfits"
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
@@ -14,7 +15,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 const rootReducer = combineReducers({
   items: itemsReducer,
-  // outfits: outfitsReducer,
+  outfits: outfitsReducer,
   currentOutfit: currentOutfitReducer
 });
 

@@ -40,23 +40,7 @@ export default function TabLayout() {
               name="index"
               options={{
                 title: '',
-                // tabBarIcon: ({ color }) => <TabBarIcon name="glasses-sharp" color={color} />,
-                // This tab will no longer show up in the tab bar.
                 href: null,
-                // headerRight: () => (
-                //   <Link href="/modal" asChild>
-                //     <Pressable>
-                //       {({ pressed }) => (
-                //         <FontAwesome
-                //           name="info-circle"
-                //           size={25}
-                //           color={Colors[colorScheme ?? 'light'].text}
-                //           style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                //         />
-                //       )}
-                //     </Pressable>
-                //   </Link>
-                // ),
               }}
             />
             <Tabs.Screen
@@ -88,6 +72,8 @@ export default function TabLayout() {
 name="_HomeTab"
 options={
 {
+  title:"",
+
   // This tab will no longer show up in the tab bar.
   href: null,
 }

@@ -11,6 +11,7 @@ const HomeTab =({loading }:HomeTabProp)=> {
     const pants = useSelector((state: RootState) => state.currentOutfit.pants);
     const shirt = useSelector((state: RootState) => state.currentOutfit.shirts);
     const shoes = useSelector((state: RootState) => state.currentOutfit.shoes);
+    const outfitsCount = useSelector((state:RootState)=>state.outfits.length);
     const progress = (!!pants?1:0)+(!!shirt?1:0)+(!!shoes?1:0);
 
 
@@ -23,14 +24,14 @@ const HomeTab =({loading }:HomeTabProp)=> {
 if(loading) return (<View style={styles.container}>
     <ActivityIndicator size="large"  animating={loading} /></View>)
 return(<View style={styles.container}>
-      {/* <ActivityIndicator size="large"  animating={loading} /> */}
+   
       <View style={{  width:"100%",alignItems: 'center',
 // justifyContent: 'center',
 }}>
 
 <Text style={{fontSize:30 , fontWeight:"600"  , top:10 }}>Application</Text>
       </View>
-<Text style={{fontSize:20 , fontWeight:"600"  , marginTop:20 , marginStart:10}}>Outfits {0}</Text>
+<Text style={{fontSize:20 , fontWeight:"600"  , marginTop:20 , marginStart:10}}>Outfits {outfitsCount}</Text>
 <Text style={{fontSize:20 , fontWeight:"600"  , marginTop:20 , marginStart:10}}>current outfit status {progress}/3</Text>
 
 

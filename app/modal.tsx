@@ -3,7 +3,7 @@ import { Image, Platform, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View  } from '../components/Themed';
-import { Outfit, OutfitItem, outfitNotReady } from '../store/slices/currentOutfit';
+import { Outfit, OutfitItem, outfitNotReady, resetAllItems } from '../store/slices/currentOutfit';
 import AppButton from '../components/AppButton';
 import { useNavigation } from '@react-navigation/native';
 import { useImages } from '../contexts/ImagesContext';
@@ -13,6 +13,7 @@ import ItemDisplay from '../components/ItemDisplay';
 import { Item, Category } from '../store/slices/items';
 import { router } from 'expo-router';
 import { useAppDispatch } from '../store/hooks';
+import { addOutfit } from '../store/slices/outfits';
 
 
 
@@ -41,11 +42,16 @@ export default function ModalScreen() {
     dispatch( outfitNotReady());
     router.replace("/_HomeTab");
   }
-
-
+  
   const pants = useSelector((state: RootState) => state.currentOutfit.pants);
   const shirt = useSelector((state: RootState) => state.currentOutfit.shirts);
   const shoes = useSelector((state: RootState) => state.currentOutfit.shoes);
+  
+    const save =()=>{
+      dispatch(addOutfit({pants , shirt , shoes}))
+      dispatch( resetAllItems() );
+      router.replace("/_HomeTab");
+    }
   return (
     <View style={styles.container}>
   <View style={{height:"40%"}}>
@@ -58,7 +64,7 @@ export default function ModalScreen() {
 <View style={{justifyContent:"center"}}>
 <AppButton title='choose another outfit' onPress={()=>{
 //TODO save outfit
-close();
+save();
 }} />
 <AppButton title='cancel' onPress={()=>{close();}} />
 

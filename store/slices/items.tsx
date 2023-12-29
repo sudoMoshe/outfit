@@ -32,6 +32,8 @@ const slice = createSlice({
     initialState:initailState,
     reducers:{
         apiCallBegan:(items)=>{
+            //quick fix to bug of refetching data on navigation between items sometimes
+            if(items.pants)return;
             // console.log("loading");
             items.loading = true;
         },
@@ -41,7 +43,6 @@ const slice = createSlice({
             items.shirts = action.payload["shirts"];
             items.shoes = action.payload["shoes"];
             items.pants = action.payload["pants"];
-            // console.log("loading finished" , items);
         },
         apiCallFailed:(items,action)=>{
             items.loading = false;
@@ -49,8 +50,6 @@ const slice = createSlice({
         },
         fakeApiCallBegan:(items)=>{
             items.loading = true;
-        //   console.log("began fake api call");
-
         },
         fakeApiCallSuccess:(items)=>{
             items.loading = false;

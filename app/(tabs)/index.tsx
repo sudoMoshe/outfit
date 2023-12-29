@@ -1,12 +1,11 @@
-import { StyleSheet , Button ,ActivityIndicator  } from 'react-native';
-// import { useDispatch, useSelector } from 'react-redux';
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View  } from '../../components/Themed';
+import { StyleSheet  } from 'react-native';
+
+import {  View  } from '../../components/Themed';
 import {  apiCallBegan, fakeApiCallBegan  } from '../../store/slices/items';
-// import { fetchData } from '../../store/Actions';
+
 import { useAppDispatch } from "../../store/hooks"
-import { useSelector, useStore } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import {  useEffect } from 'react';
 import HomeTab from './_HomeTab';
 import { RootState } from '../../store/store';
 
@@ -14,7 +13,9 @@ export default function MainScreen() {
 
   const dispatch = useAppDispatch();
   useEffect(()=>{
-    dispatch(fakeApiCallBegan());
+    // use fake api
+    // dispatch(fakeApiCallBegan());
+    dispatch(apiCallBegan());
   },[]);
   const loading = useSelector((state: RootState) => state.items.loading);
 
